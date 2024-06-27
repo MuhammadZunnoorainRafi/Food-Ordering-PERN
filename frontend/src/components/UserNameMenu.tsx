@@ -3,6 +3,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -16,23 +18,30 @@ const UsernameMenu = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-orange-500 gap-2">
+      <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={user?.picture} alt="@shadcn" />
           <AvatarFallback>USER</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>
+        <DropdownMenuLabel>
+          <div className="flex items-center  font-bold gap-2">
+            <CircleUserRound />
+            {user?.email}
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {/* <DropdownMenuItem>
           <Link
             to="/manage-restaurant"
             className="font-bold hover:text-orange-500"
           >
             Manage Restaurant
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem>
-          <Link to="/user-profile" className="font-bold hover:text-orange-500">
+          <Link to="/user-profile" className="font-bold hover:text-slate-800">
             User Profile
           </Link>
         </DropdownMenuItem>
@@ -40,7 +49,7 @@ const UsernameMenu = () => {
         <DropdownMenuItem>
           <Button
             onClick={() => logout()}
-            className="flex flex-1 font-bold bg-orange-500"
+            className="flex flex-1 font-bold bg-slate-800"
           >
             Log Out
           </Button>
