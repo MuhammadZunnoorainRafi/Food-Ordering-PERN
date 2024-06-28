@@ -2,6 +2,25 @@ import { Request, Response } from 'express';
 import { pool } from '../lib/db';
 import { updateUserSchema } from '../lib/schema';
 
+export const getUserController = async (req: Request, res: Response) => {
+  const db = await pool.connect();
+  try {
+    const { rows: user } = await db.query(`SELECT * FROM users WHERE id=$1`, [
+      req.userId,
+    ]);
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+    res.status(200).json(user[0]);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Something went wrong' });
+  } finally {
+    db.release();
+  }
+};
+
 export const userRegController = async (req: Request, res: Response) => {
   const { auth0Id, email } = req.body;
   const db = await pool.connect();
@@ -50,9 +69,10 @@ export const updateUserController = async (req: Request, res: Response) => {
       userId: req.userId,
     };
     await db.query(
-      `UPDATE users SET name=$1,city=$2,country=$3,address_line_1=$4 WHERE id=$5`,
+      `UPDATE users SET name=$1,city=$2,country=$3,address=$4 WHERE id=$5`,
       Object.values(values)
     );
+    res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: 'Something went wrong' });

@@ -8,7 +8,7 @@ const createUserTable = async (db) => {
   email TEXT NOT NULL,
   city TEXT,
   country TEXT,
-  address_line_1 TEXT,
+  address TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
   )`);
 };

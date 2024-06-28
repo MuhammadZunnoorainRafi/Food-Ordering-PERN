@@ -25,7 +25,7 @@ export const jwtParser = async (
 ) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(400).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const token = authorization.split(' ')[1];
@@ -38,7 +38,7 @@ export const jwtParser = async (
     const decoded = jwt.decode(token) as jwt.JwtPayload;
     const auth0Id = decoded.sub;
     const { rows: user } = await db.query(
-      `SELECT * FROM users WHERE auth0Id=1`,
+      `SELECT * FROM users WHERE auth0Id=$1`,
       [auth0Id]
     );
     if (!user[0]) {
@@ -49,7 +49,7 @@ export const jwtParser = async (
     next();
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   } finally {
     db.release();
   }
