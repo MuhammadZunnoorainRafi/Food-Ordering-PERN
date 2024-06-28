@@ -31,11 +31,14 @@ export const useCreateUser = () => {
   const {
     mutateAsync: createUser,
     isPending,
-    isError,
-    isSuccess,
+    reset,
   } = useMutation({
     mutationFn: createUserRequest,
+    onError: (error) => {
+      toast.error(error.message);
+      reset();
+    },
   });
 
-  return { createUser, isPending, isError, isSuccess };
+  return { createUser, isPending };
 };
