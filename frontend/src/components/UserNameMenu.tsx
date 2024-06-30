@@ -32,19 +32,20 @@ const UsernameMenu = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuItem>
+        <DropdownMenuItem>
           <Link
             to="/manage-restaurant"
             className="font-bold hover:text-orange-500"
           >
             Manage Restaurant
           </Link>
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <Link to="/user-profile" className="font-bold hover:text-slate-800">
             User Profile
           </Link>
         </DropdownMenuItem>
+
         <Separator />
         <DropdownMenuItem>
           <Button

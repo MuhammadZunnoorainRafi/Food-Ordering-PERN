@@ -4,6 +4,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "script": "node -r dotenv/config ./script/script.js",
+    "build": "npm install && npx tsc",
+    "start": "node ./dist/src/index.js",
     "server": "nodemon"
   },
   "keywords": [],

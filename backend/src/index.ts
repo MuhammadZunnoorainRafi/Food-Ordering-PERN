@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/', async (req, res) => {
-  res.send('Hello zunnoorain');
+  res.json({ message: 'Hello zunnoorain' });
 });
 
 app.use('/api/user', userRouter);

@@ -14,7 +14,6 @@ function AuthCallback() {
       createUser({ auth0Id: user.sub, email: user.email });
       hasUserCreated.current = true;
     }
-    console.log('from authCallback.tsx');
     navigate('/');
   }, [createUser, navigate, user]);
 
