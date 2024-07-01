@@ -13,6 +13,17 @@ const createUserTable = async (db) => {
   )`);
 };
 
+const createProductTable = async (db) => {
+  await db.query(`CREATE TABLE IF NOT EXISTS products(
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name TEXT NOT NULL,
+    city TEXT NOT NULL,
+    cuisine TEXT[] NOT NULL,
+    menu_items JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    )`);
+};
+
 const main = async () => {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URI,
@@ -20,6 +31,7 @@ const main = async () => {
   const db = await pool.connect();
 
   await createUserTable(db);
+  await createProductTable(db);
 
   db.release();
 };

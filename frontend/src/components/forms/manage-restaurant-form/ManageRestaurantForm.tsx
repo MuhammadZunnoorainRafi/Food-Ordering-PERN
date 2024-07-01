@@ -5,6 +5,7 @@ import { Form } from '../../ui/form';
 import { Button } from '../../ui/button';
 import DetailsSection from './DetailsSection';
 import CusineSection from './CusineSection';
+import MenuSection from './MenuSection';
 
 function ManageRestaurantForm() {
   const form = useForm<RestaurantFormType>({
@@ -30,6 +31,7 @@ function ManageRestaurantForm() {
         >
           <DetailsSection />
           <CusineSection />
+          <MenuSection />
           {
             //  isLoading ? <LoadingButton /> :
             <Button type="submit">Submit</Button>

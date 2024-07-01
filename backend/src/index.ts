@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 import userRouter from '../routes/userRoute';
+import productRoute from '../routes/productRoute';
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/api/user', userRouter);
+app.use('/api/product', productRoute);
 
 app.listen(4000, () => console.log(`Server is running on PORT: ${4000}`));
