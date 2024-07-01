@@ -8,7 +8,7 @@ export const updateUserSchema = z.object({
 });
 
 export const restaurantFormSchema = z.object({
-  name: z.string().min(1, 'Enter name'),
+  name: z.string({ required_error: 'enter name' }).min(1, 'Enter name'),
   city: z.string().min(1, 'Enter city'),
   cuisine: z.array(z.string()).min(1, 'Select atleast one value'),
   menu_items: z
